@@ -52,7 +52,7 @@ my $checkIfParsedCorrectly=sub ($) {
                  (exists $parsed->{'message'}));
     return (0,"uncaught/unexpected log line format");
 };
-open(EXIMLOG,"cat t/010_parse_compose_loglines.log |");
+open(EXIMLOG,"t/010_parse_compose_loglines.log");
 while (my $line = <EXIMLOG>) {
     chomp ($line);
     #print ">> $line\n";

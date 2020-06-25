@@ -37,23 +37,29 @@ Mail::Exim::MainLogParser - Parse log lines from the Exim Main Log
 # DESCRIPTION
 
 This module will parse log lines from Exim version 4, according to the source
-http://www.exim.org/exim-html-current/doc/html/spec\_html/ch-log\_files.html
+[http://www.exim.org/exim-html-current/doc/html/spec\_html/ch-log\_files.html](http://www.exim.org/exim-html-current/doc/html/spec_html/ch-log_files.html)
 as of 2017-06-08
 
 # REQUIREMENTS
 
-This module is pure perl and does not depend on other modules. But does
-depend on a log file from Exim version 4 main log output.
+This module is pure perl and does not depend on other modules.
 
 - Exim 4
 
-# IMPORTED METHODS
+# IMPORTABLE METHODS
 
 When the calling application invokes this module in a use clause, the following
-method can be imported into its space.
+methods can optionally be imported into its space. They are not imported by
+default, and must be explicitly imported (See "Import Example").
 
 - `EximMainLoglineParse`
 - `EximMainLoglineCompose`
+
+**Import Example**
+
+    use Mail::Exim::MainLogParser qw(EximMainLoglineParse EximMainLoglineCompose);
+    my $exim_parsed_logline             = EximMainLoglineParse($exim_logline_original_string);
+    my $exim_logline_recomposed_string  = EximMainLoglineCompose($exim_parsed_logline);
 
 # METHODS
 
@@ -67,7 +73,7 @@ be called outside of OO style programming.
 
     An object instance of this module.
 
-    my $eximlog = new Mail::Exim::MainLogParser();
+    my $exlog = new Mail::Exim::MainLogParser();
 
 ## EximMainLoglineParse
 
@@ -127,7 +133,7 @@ Compose a log line from a parsed main log line hash and return as a string.
 
     This is a single parsed line from the Exim main log output represented as a HASH.
 
-        $exim_parsed_main_log_line = {
+        $exim_log_line_hash = {
               'eximid' => '1dJ08B-0003oP-5i',
               'time' => '11:17:56',
               'date' => '2017-06-08',
@@ -153,7 +159,7 @@ This method returns a string composition of the parsed log line HASH structure.
 It is intended that the composed string matches the original log line that was
 parsed, minus trailing white space.
 
-    print "$LoglineComposed";
+    print "$exim_log_line_composed";
     2017-06-08 11:17:56 1dJ08B-0003oP-5i <= do-not-reply@nowhere.com
         H=realmail.server.example.com (ehlo-name.example.com) [192.168.250.101]
         P=esmtp S=1364 id=266785270.3.2385849643852@peerhost.server.example.com
@@ -216,11 +222,11 @@ parsed, minus trailing white space.
 
 # AUTHOR
 
-Russell Glaue, http://russ.glaue.org
+Russell Glaue, [http://russ.glaue.org](http://russ.glaue.org)
 
 # SEE ALSO
 
-Exim4 log documentation: http://www.exim.org/exim-html-current/doc/html/spec\_html/ch-log\_files.html
+Exim4 log documentation: [http://www.exim.org/exim-html-current/doc/html/spec\_html/ch-log\_files.html](http://www.exim.org/exim-html-current/doc/html/spec_html/ch-log_files.html)
 
 # COPYRIGHT
 
